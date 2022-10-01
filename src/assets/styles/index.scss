@@ -191,3 +191,7 @@ aside {
 .multiselect--active {
   z-index: 1000 !important;
 }
+
+.el-input-number .el-input__inner{
+  text-align: start !important;
+}
