@@ -91,7 +91,7 @@ export const dynamicRoutes = [
   {
     path: '/goods',
     component: Layout,
-    meta: { title: '商品管理', activeMenu: '/goods', menu: true },
+    meta: { title: '商品管理', activeMenu: '/goods', menu: true, breadcrumb: false },
     children: [
       {
         path: 'index',
@@ -101,7 +101,7 @@ export const dynamicRoutes = [
       {
         path: 'add',
         component: () => import('@/views/goods/components/add'),
-        meta: { title: '商品新增', activeMenu: '/goods' }
+        meta: { title: '商品新增', activeMenu: '/goods', }
       },
       {
         path: 'detail',
@@ -113,23 +113,19 @@ export const dynamicRoutes = [
   {
     path: '/user',
     component: Layout,
-    meta: { title: '用户管理', activeMenu: '/user', menu: true },
+    meta: { title: '用户管理', activeMenu: '/user', menu: true, breadcrumb: false },
     children: [
       {
         path: 'index',
         component: () => import('@/views/user/index'),
-        meta: { title: '商品列表', activeMenu: '/goods' }
-      },
-      {
-        path: 'add',
-        component: () => import('@/views/goods/components/add'),
-        meta: { title: '用户新增', activeMenu: '/goods' }
+        meta: { title: '用户列表', activeMenu: '/user', isMenu: true, }
       },
       {
         path: 'detail',
-        component: () => import('@/views/goods/components/detail'),
-        meta: { title: '商品明细列表', activeMenu: '/goods' }
-      }
+        component: () => import('@/views/user/detail'),
+        hidden: true,
+        meta: { title: '用户详情', activeMenu: '/user', }
+      },
     ]
   }
 ]

@@ -17,6 +17,30 @@ export const dicts = {
       key: 1,
       value: '盲盒'
     }
+  ],
+  robotFlag: [
+    {
+      key: 0,
+      value: '否'
+    },
+    {
+      key: 1,
+      value: '是'
+    }
+  ],
+  statusFlag: [
+    {
+      key: 0,
+      value: '未实名'
+    },
+    {
+      key: 1,
+      value: '正常'
+    },
+    {
+      key: 2,
+      value: '封号'
+    }
   ]
 }
 
