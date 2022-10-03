@@ -101,7 +101,6 @@ const createDetails = async (row) => {
 .goods {
     height: calc(100vh - 84px);
     overflow: auto;
-    padding: 0 20px;
 }
 .goods .button-list {
     padding: 15px 0;

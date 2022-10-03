@@ -188,7 +188,6 @@ const toDetail = (id) => {
 .user {
     height: calc(100vh - 84px);
     overflow: auto;
-    padding: 0 20px;
 }
 .user .button-list {
     padding: 15px 0;

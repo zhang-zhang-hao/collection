@@ -1,15 +1,36 @@
 <template>
     <div class="goods-detail">
         <div class="button-list">
-            <el-select v-model="form.goods_id" placeholder="商品ID">
-                <el-option :label="item.value" :value="item.key" v-for="item in typeList" :key="item.key" />
-            </el-select>
-            <el-select v-model="form.series_id" placeholder="系列ID">
-                <el-option :label="item.value" :value="item.key" v-for="item in typeList" :key="item.key" />
-            </el-select>
-            <el-input v-model="form.goods_name" autocomplete="off" placeholder="藏品名称" />
-            <el-input v-model="form.series_name" autocomplete="off" placeholder="系列名称" />
-            <el-input v-model="form.user_id" autocomplete="off" placeholder="用户ID" />
+            <el-row :gutter="12" class="mb10">
+                <el-col :span="8">
+                    <el-select v-model="form.goods_id" placeholder="商品ID">
+                        <el-option :label="item.value" :value="item.key" v-for="item in typeList" :key="item.key" />
+                    </el-select>
+                </el-col>
+                <el-col :span="8">
+                    <el-select v-model="form.series_id" placeholder="系列ID">
+                        <el-option :label="item.value" :value="item.key" v-for="item in typeList" :key="item.key" />
+                    </el-select>
+                </el-col>
+                <el-col :span="8">
+                    <el-input v-model="form.goods_name" autocomplete="off" placeholder="藏品名称" />
+                </el-col>
+            </el-row>
+
+            <el-row :gutter="12" class="mb10">
+                <el-col :span="8">
+                    <el-input v-model="form.series_name" autocomplete="off" placeholder="系列名称" />
+                </el-col>
+                <el-col :span="8">
+                    <el-input v-model="form.user_id" autocomplete="off" placeholder="用户ID" />
+                </el-col>
+            </el-row>
+
+            <el-row class="mb10">
+                <el-button type="primary" @click="search">查询</el-button>
+                <el-button type="primary" @click="reset">重置</el-button>
+            </el-row>
+
         </div>
         <el-table height="calc(100% - 36px)" :data="tableData.value" style="width: 100%">
             <el-table-column prop="goodsBidPrice" label="买入价格" width="180" />
@@ -64,6 +85,25 @@ const form = reactive({
     status_flag: '',
 })
 
+const search = () => {
+    getTableList()
+}
+
+const reset = () => {
+    Object.assign(form, {
+        goods_id: '',
+        series_id: '',
+        goods_name: '',
+        series_name: '',
+        user_id: '',
+        page: 1,
+        size: 20,
+        goods_type: '',
+        status_flag: '',
+    })
+    getTableList()
+}
+
 const showAdd = () => {
     router.push('/goods/add')
 }
@@ -84,6 +124,5 @@ const handleCurrentChange = () => {
 .goods-detail {
     height: calc(100vh - 84px);
     overflow: auto;
-    padding: 0 20px;
 }
 </style>

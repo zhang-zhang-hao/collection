@@ -60,13 +60,11 @@ export const constantRoutes = [
   {
     path: '',
     component: Layout,
-    redirect: '/index',
+    redirect: '/goods/index',
     children: [
       {
         path: '/index',
-        component: () => import('@/views/index'),
-        name: 'Index',
-        meta: { title: '首页', icon: 'dashboard', affix: true }
+        redirect: '/goods/index',
       }
     ]
   },
@@ -125,6 +123,11 @@ export const dynamicRoutes = [
         component: () => import('@/views/user/detail'),
         hidden: true,
         meta: { title: '用户详情', activeMenu: '/user', }
+      },
+      {
+        path: 'add',
+        component: () => import('@/views/user/add'),
+        meta: { title: '用户新增', activeMenu: '/user', }
       },
     ]
   }

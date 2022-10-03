@@ -43,3 +43,14 @@ export function getWalletChain (data) {
     data: data
   })
 }
+
+export function add (data) {
+  return request({
+    url: '/user/add',
+    headers: {
+      isToken: false
+    },
+    method: 'post',
+    data: data
+  })
+}
