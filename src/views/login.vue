@@ -53,6 +53,7 @@ import useUserStore from '@/store/modules/user'
 const userStore = useUserStore()
 const router = useRouter()
 const { proxy } = getCurrentInstance()
+const baseUrl = import.meta.env.VITE_APP_BASE_API
 
 const loginForm = ref({
     username: 'admin',
@@ -68,7 +69,8 @@ const loginRules = {
     code: [{ required: true, trigger: 'change', message: '请输入验证码' }],
 }
 
-const codeUrl = ref('')
+const codeUrl = ref(`${baseUrl}/captcha/captchaImage?type=math`)
+
 const loading = ref(false)
 // 验证码开关
 const captchaEnabled = ref(true)
@@ -80,8 +82,6 @@ function handleLogin() {
     proxy.$refs.loginRef.validate((valid) => {
         if (valid) {
             loading.value = true
-            console.log(loading)
-            router.push({ path: redirect.value || '/' })
             // 勾选了需要记住密码设置在 cookie 中设置记住用户名和密码
             if (loginForm.value.rememberMe) {
                 Cookies.set('username', loginForm.value.username, {
@@ -101,15 +101,18 @@ function handleLogin() {
             }
             // 调用action的登录方法
 
-            //   userStore.login(loginForm.value).then(() => {
-
-            //   }).catch(() => {
-            //     loading.value = false;
-            //     // 重新获取验证码
-            //     if (captchaEnabled.value) {
-            //       getCode();
-            //     }
-            //   });
+            userStore
+                .login(loginForm.value)
+                .then(() => {
+                    router.push({ path: redirect.value || '/' })
+                })
+                .catch(() => {
+                    loading.value = false
+                    // 重新获取验证码
+                    if (captchaEnabled.value) {
+                        getCode()
+                    }
+                })
         }
     })
 }
